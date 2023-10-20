@@ -187,10 +187,10 @@ export const navigation = [
     title: '🔥 Protocol',
     links: [{ title: '👋 Introduction', href: '/' }],
   },
-  // {
-  //   title: '📚 Documentation',
-  //   links: [{ title: 'Quickstart', href: '/quickstart' }],
-  // },
+  {
+    title: '📚 Documentation',
+    links: [{ title: 'Quickstart', href: '/quickstart' }],
+  },
 ]
 
 export function Navigation(props) {

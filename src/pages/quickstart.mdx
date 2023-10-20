@@ -1,0 +1,111 @@
+export const description =
+  'On this page, look how initialize and use top of firethree functions.'
+
+# Initialization
+
+Create your own Solana dApp with collection, storage, analytics with this protocol. storage with @GenesysGo and multisig by @SquadsProtocol!
+
+## Install
+
+```bash
+npm install @firethreexyz/firethree-protocol
+
+# or
+
+yarn add @firethreexyz/firethree-protocol
+```
+
+## Init Firethree Instance
+
+- For the wallet(second paramater) you can use the KeyPair! `Add in your env and setup a new wallet`
+- Attention the wallet is the payer of the transactions
+
+```ts
+import Firethree from '@firethreexyz/firethree-protocol'
+
+const projectName = 'My Project'
+
+const firethree = new Firethree(connection, {
+  publicKey: wallet.publicKey!,
+  signTransaction: wallet.signTransaction!,
+  signAllTransactions: wallet.signAllTransactions!,
+  signMessage: wallet.signMessage!,
+}).init(projectName)
+```
+
+<Properties>
+  <Property name="connection" type="Connection">
+    Here you can use the connection from @solana/web3.js
+  </Property>
+  <Property name="Wallet" type="Wallet">
+    You can use the wallet from @solana/wallet-adapter-react or Just use the
+    Keypair!
+  </Property>
+  <Property name="opts" type="ConfirmOptions | undefined">
+    The ConfirmOptions is the options for the confirmations of the transactions
+    (skipPreflight, preflightCommitment, commitment)
+  </Property>
+</Properties>
+
+---
+
+## Create a project {{ tag: 'create()' }}
+
+<Row>
+  <Col>
+
+    This function allows you to create a new project on chain!
+
+    ### Required attributes
+
+    <Properties>
+      <Property name="name" type="string">
+        The name for the project.
+      </Property>
+        <Property name="creator" type="PublicKey">
+        Owner of the project
+      </Property>
+      <Property name="members" type="PublicKey[]">
+        Members of the project
+      </Property>
+      <Property name="threshold" type="number">
+      Votes for a transaction proposal to be approved (Muiltisig)
+      </Property>
+      <Property name="shdwSize" type="string">
+        Amount of storage you are requesting to create. Should be in a string like '1KB', '1MB', '1GB'. Only KB, MB, and GB storage delineations are supported currently.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="create()" label="Project">
+
+    ```ts
+    import Firethree from '@firethreexyz/firethree-protocol'
+
+    const projectName = 'My Project'
+
+    const firethree = new Firethree
+    const creator = new KeyPair()
+
+    await firethree.project.create({
+      name: projectName,
+      creator: creator.publicKey,
+      members: [creator.publicKey],
+      threshold: 1,
+      shdwSize: "1GB",
+      image: File
+    });
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {}
+    ```
+
+  </Col>
+</Row>
+
+---
