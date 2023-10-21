@@ -189,7 +189,10 @@ export const navigation = [
   },
   {
     title: '📚 Documentation',
-    links: [{ title: 'Quickstart', href: '/quickstart' }],
+    links: [
+      { title: 'Quickstart', href: '/quickstart' },
+      { title: 'Project', href: '/project' },
+    ],
   },
 ]
 

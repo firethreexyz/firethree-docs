@@ -1,0 +1,246 @@
+# Project
+
+The Project class allows you to interact with projects on chain.
+
+## Create a project {{ tag: 'create()' }}
+
+<Row>
+  <Col>
+
+    This function allows you to create a new project on chain!
+
+    ### Required attributes
+
+    <Properties>
+      <Property name="name" type="string">
+        The name for the project.
+      </Property>
+        <Property name="creator" type="PublicKey">
+        Owner of the project
+      </Property>
+      <Property name="members" type="PublicKey[]">
+        Members of the project
+      </Property>
+      <Property name="threshold" type="number">
+      Votes for a transaction proposal to be approved (Muiltisig)
+      </Property>
+      <Property name="shdwSize" type="string">
+        Amount of storage you are requesting to create. Should be in a string like '1KB', '1MB', '1GB'. Only KB, MB, and GB storage delineations are supported currently.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="create()" label="Project">
+
+    ```ts
+    import Firethree from '@firethreexyz/firethree-protocol'
+
+    const projectName = 'My Project'
+
+    const firethree = new Firethree
+    const creator = new KeyPair()
+
+    await firethree.project.create({
+      name: projectName,
+      creator: creator.publicKey,
+      members: [creator.publicKey],
+      threshold: 1,
+      shdwSize: "1GB",
+      image: File
+    });
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {}
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Get a project by name {{ tag: 'get()' }}
+
+<Row>
+  <Col>
+
+Retrieve a project using its name.
+
+### Required attributes
+
+<Properties>
+  <Property name="name" type="string">
+    The name of the project you want to fetch.
+  </Property>
+</Properties>
+  </Col>
+  <Col sticky>
+<CodeGroup title="Request" tag="get()" label="Project">
+
+```ts
+const projectName = 'Example Project Name'
+const projectInstance = new Poject(program, wallet)
+const projectDetails = await projectInstance.get(projectName)
+```
+
+</CodeGroup>
+
+```json {{ title: 'Response' }}
+{
+  "name": "decoded_project_name",
+  "ts": "timestamp_as_number"
+  // ...other project details
+}
+```
+
+  </Col>
+</Row>
+
+---
+
+## Get projects by user public key {{ tag: 'getProjectsByUserPublicKey()' }}
+
+<Row>
+  <Col>
+
+Retrieve all projects associated with a user's public key.
+
+### Required attributes
+
+<Properties>
+  <Property name="publicKey" type="PublicKey">
+    The public key of the user.
+  </Property>
+</Properties>
+
+  </Col>
+  <Col sticky>
+
+  <CodeGroup title="Request" tag="getProjectsByUserPublicKey()" label="Projects">
+
+```ts
+const userPublicKey = new PublicKey('YOUR_PUBLIC_KEY')
+const projectInstance = new Poject(program, wallet)
+const projects = await projectInstance.getProjectsByUserPublicKey(userPublicKey)
+```
+
+</CodeGroup>
+
+```json {{ title: 'Response' }}
+[
+  // Array of projects associated with the user's public key
+]
+```
+
+  </Col>
+</Row>
+
+---
+
+## Get all projects {{ tag: 'getAll()' }}
+
+<Row>
+  <Col>
+  Retrieve all projects.
+   </Col>
+  <Col sticky>
+
+  <CodeGroup title="Request" tag="getAll()" label="Projects">
+
+```ts
+const projectInstance = new Poject(program, wallet)
+const allProjects = await projectInstance.getAll()
+```
+
+</CodeGroup>
+
+```json {{ title: 'Response' }}
+[
+  // Array of all projects
+]
+```
+
+  </Col>
+</Row>
+
+---
+
+## Add a new member {{ tag: 'addMember()' }}
+
+<Row>
+  <Col>
+Add a new member to a project.
+
+### Required attributes
+
+<Properties>
+  <Property name="name" type="string">
+    Name of the project.
+  </Property>
+  <Property name="member" type="PublicKey">
+    Public key of the new member.
+  </Property>
+</Properties>
+  </Col>
+  <Col sticky>
+
+  <CodeGroup title="Request" tag="addMember()" label="Member">
+
+```ts
+const projectName = 'Example Project Name'
+const newMemberPublicKey = new PublicKey('NEW_MEMBER_PUBLIC_KEY')
+const projectInstance = new Poject(program, wallet)
+
+await projectInstance.addMember(projectName, newMemberPublicKey)
+```
+
+</CodeGroup>
+
+```json {{ title: 'Response' }}
+{
+  // ...response details
+}
+```
+
+  </Col>
+</Row>
+
+## Delete a project {{ tag: 'deleteProject()' }}
+
+<Row>
+  <Col>
+Delete a project by its name.
+
+### Required attributes
+
+<Properties>
+  <Property name="name" type="string">
+    Name of the project to be deleted.
+  </Property>
+</Properties>
+ </Col>
+  <Col sticky>
+
+  <CodeGroup title="Request" tag="deleteProject()" label="Deletion">
+
+```ts
+const projectName = 'Example Project Name'
+const projectInstance = new Poject(program, wallet)
+
+await projectInstance.deleteProject({ name: projectName })
+```
+
+</CodeGroup>
+
+```json {{ title: 'Response' }}
+{
+  // ...response details
+}
+```
+
+ </Col>
+</Row>
